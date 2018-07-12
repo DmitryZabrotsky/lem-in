@@ -11,27 +11,36 @@ int			read_value(char *str, int i)
 	return (res);
 }
 
+void print_list(t_list *lst)
+{
+	t_list *tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		printf("%s%s%10zu%s\n\n", BLUE, tmp->content, tmp->content_size, RESET);
+		tmp = tmp->next;
+	}
+}
+
 int			main(void)
 {
+	t_list	*file;
 	t_farm	*farm;
 	char 	*str;
 
+	file = NULL;
 	farm = create_farm();
 	while (get_next_line(0, &str))
 	{
+		ft_lstaddend(&file, ft_lstnew(str, ft_strlen(str)));
 		if (ft_strequ(str, "##start") || ft_strequ(str, "##end"))
 		{
-			ft_putstr(GREEN);
-			ft_putendl(str);
-			ft_putstr(RESET);
 			if (ft_strequ(str, "##start"))
 			{
 				free(str);
 				if (get_next_line(0, &str))
 				{
-					ft_putstr(GREEN);
-					ft_putendl(str);
-					ft_putstr(RESET);
 					farm->start = read_value(str, 0);
 				}
 			}
@@ -40,23 +49,15 @@ int			main(void)
 				free(str);
 				if (get_next_line(0, &str))
 				{
-					ft_putstr(GREEN);
-					ft_putendl(str);
-					ft_putstr(RESET);
 					farm->end = read_value(str, 0);
 				}
 			}
 		}
-		else
-		{
-			ft_putstr(BLUE);
-			ft_putendl(str);
-			ft_putstr(RESET);
-		}
 		free(str);
 	}
 	
-	printf("%sstart: %i\nend: %i\n%s", RED, farm->start, farm->end, RESET);
+	print_list(file);
+	printf("%sstart: %i\nend: %i\n%s", GREEN, farm->start, farm->end, RESET);
 
 	return 0;
 }
