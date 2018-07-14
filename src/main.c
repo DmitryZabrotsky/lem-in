@@ -18,7 +18,8 @@ void print_list(t_list *lst)
 	tmp = lst;
 	while (tmp)
 	{
-		printf("%s%s%10zu%s\n\n", BLUE, tmp->content, tmp->content_size, RESET);
+		//printf("%s%s%10zu%s\n", BLUE, tmp->content, tmp->content_size, RESET);
+		ft_putendl((char *)tmp->content);
 		tmp = tmp->next;
 	}
 }
@@ -33,7 +34,7 @@ int			main(void)
 	farm = create_farm();
 	while (get_next_line(0, &str))
 	{
-		ft_lstaddend(&file, ft_lstnew(str, ft_strlen(str)));
+		ft_lstaddend(&file, ft_lstnew(str, ft_strlen(str) + 1));
 		if (ft_strequ(str, "##start") || ft_strequ(str, "##end"))
 		{
 			if (ft_strequ(str, "##start"))
@@ -53,11 +54,17 @@ int			main(void)
 				}
 			}
 		}
+		printf("%s%s%s\n", YELLOW, str, RESET);
 		free(str);
 	}
 	
 	print_list(file);
+	ft_lstfree(&file);
 	printf("%sstart: %i\nend: %i\n%s", GREEN, farm->start, farm->end, RESET);
 
+	// while (1)
+	// {
+		
+	// }
 	return 0;
 }
