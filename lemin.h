@@ -5,10 +5,20 @@
 # include <stdio.h>
 
 typedef struct	s_farm {
-	int			start;
-	int			end;
+	t_room		*start;
+	t_room		*end;
+	int			ants;
+	t_list		*rooms;
 }				t_farm;
 
-t_farm			*create_farm();
+typedef	struct s_room {
+	char		*name;
+	int			x;
+	int			y;
+	t_list		*connections;
+};
+
+t_farm			*new_farm();
+t_room			*new_room();
 
 #endif
