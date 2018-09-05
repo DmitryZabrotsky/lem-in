@@ -28,6 +28,15 @@ t_room *new_room()
 	return (res);
 }
 
+t_list *to_lst(void *obj)
+{
+	t_list *lst;
+
+	lst = ft_lstnew(NULL, 0);
+	lst->content = obj;
+	return (lst);
+}
+
 void describe_room(t_room *room)
 {
 	t_list *lst;

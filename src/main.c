@@ -1,48 +1,44 @@
 #include "../lemin.h"
 
-int is_int(char *s)
+void del_room(t_room *room)
 {
-	int i;
+	t_list *lst;
+	t_list *lstnext;
 
-	i = 0;
-	while (s[i])
+	if (!room)
+		return ;
+	free(room->name);
+	lst = room->connections;
+	while (lst)
 	{
-		if (!ft_isdigit(s[i]))
-			return (0);
-		i++;
+		lstnext = lst->next;
+		free(lst);
+		lst = lstnext;
 	}
-	return (1);
+	free(room);
 }
 
-int parse_ants(char *s, t_farm *farm)
+void del_farm(t_farm *farm)
 {
-	if (!is_int(s))
-		return (0);
-	farm->ants = ft_atoi(s);
-	if (farm->ants <= 0)
-		return (0);
-	return (1);
-}
-
-int stage_one(t_farm *farm)
-{
-	char *s;
-
-	while (get_next_line(0, &s) > 0)
+	t_list *lst;
+	t_list *next;
+	lst = farm->rooms;
+	while (lst)
 	{
-		if (s[0] != '#')
-			return (parse_ants(s, farm));
+		next = lst->next;
+		del_room(lst->content);
+		free(lst);
+		lst = next;
 	}
-	return (0);
+	free(farm);
 }
 
 void error_manager(int code, t_farm *farm)
 {
 	if (code == 0)
 	{
-		(void)farm;
 		ft_putendl(RED "ERROR" RESET);
-		//del_farm(farm);
+		del_farm(farm);
 		exit(1);
 	}
 }
@@ -50,9 +46,16 @@ void error_manager(int code, t_farm *farm)
 int main(void)
 {
 	t_farm *farm;
-	
+
 	farm = new_farm();
 	error_manager(stage_one(farm), farm);
+	stage_three(stage_two(farm), farm);
+	ft_putendl(YELLOW "--     --" RESET);
 	describe_farm(farm);
-	//del_farm(farm);
+	del_farm(farm);
+
+	// while (42)
+	// {
+
+	// }
 }
