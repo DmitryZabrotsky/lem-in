@@ -54,12 +54,12 @@ int main(void)
 	ft_putendl(YELLOW "--     --" RESET);
 	describe_farm(farm);
 
-	// spawn_ants(farm);
-	// while (farm->counter < farm->ants)
-	// {
-	// 	move_ants(farm);
-	// 	ft_putendl("");
-	// }
+	spawn_ants(farm);
+	while (farm->counter < farm->ants)
+	{
+		move_ants(farm);
+		ft_putendl("");
+	}
 
 	del_farm(farm);
 

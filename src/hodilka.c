@@ -9,7 +9,7 @@ void		spawn_ants(t_farm *farm)
 	{
 		ft_lstaddend(&farm->crew ,to_lst(new_ant(++i, farm->start)));
 	}
-	printf("all ants are in\n");
+	// printf("all ants are in\n");
 }
 
 void		ant_info(t_ant *ant)
@@ -25,17 +25,29 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 	t_list *lst;
 	t_room *room;
 
-	printf("check_way\n");
+	// printf("check_way\n");
 	lst = ant->location->connections;
 	while (lst)
 	{
 		room = lst->content;
+
+		// printf("room: %s (%i)   ant-location: %s (%i)\n",
+		// 	room->name, room->weight, ant->location->name, ant->location->weight);
+		// if (!room->lock)
+		// 	printf("room is UNLOCKED\n");
+		// else
+		// 	printf("room is L O C K E D\n");
+		// if (is_way_exist(room, way))
+		// 	printf("WAY EXIST");
+		// else
+		// 	printf("WAY no EXIST");
+
 		if (!room->lock && is_way_exist(room, way) &&
-			room->weight < ant->location->weight)
+			room->weight > ant->location->weight)
 		{
 			ant->location->lock = 0;
 			ant->location = room;
-			if (ant->location->weight > 0)
+			if (ant->location->weight < 2147483647)
 				ant->location->lock = 1;
 			else
 				farm->counter++;
@@ -53,8 +65,8 @@ void		move_ant(t_ant *ant, t_farm *farm)
 	t_list *lst;
 	t_room *way;
 
-	printf("move ANT\n");
-	if (ant->location->weight == 0)
+	// printf("move ANT\n");
+	if (ant->location->weight == 2147483647)
 		return ;
 	lst = ant->location->ways;
 	while (lst)
@@ -73,7 +85,7 @@ void		move_ants(t_farm *farm)
 	t_list *lst;
 	t_ant *curr_ant;
 
-	printf("move_ants\n");
+	// printf("move_ants\n");
 	lst = farm->crew;
 	while (lst)
 	{
