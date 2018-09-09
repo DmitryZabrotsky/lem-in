@@ -24,6 +24,8 @@ t_room *new_room()
 		res->x = -1;
 		res->y = -1;
 		res->connections = NULL;
+		res->weight = -1;
+		res->way = NULL;	
 	}
 	return (res);
 }
@@ -42,9 +44,17 @@ void describe_room(t_room *room)
 	t_list *lst;
 	t_room *buf;
 
-	printf("name: %s\nx: %i y: %i\n", room->name, room->x, room->y);
+	printf("name: %s\nx: %i y: %i\nweight: %i\n", room->name, room->x, room->y, room->weight);
 
 	lst = room->connections;
+	while (lst)
+	{
+		buf = lst->content;
+		printf("%s ", buf->name);
+		lst = lst->next;
+	}
+	printf("\n");
+	lst = room->way;
 	while (lst)
 	{
 		buf = lst->content;

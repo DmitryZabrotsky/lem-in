@@ -9,6 +9,8 @@ typedef	struct s_room {
 	int			x;
 	int			y;
 	t_list		*connections;
+	int			weight;
+	t_list		*way;
 }				t_room;
 
 typedef struct	s_farm {
@@ -43,4 +45,9 @@ int				check_num_of_parts(char **arr, int etalon);
 */
 void			stage_three(char *s, t_farm *farm);
 t_room			*get_room(char *s, t_farm *farm);
+
+/*
+ ** room_handler.c
+*/
+void			start_handleing(t_farm *farm);
 #endif

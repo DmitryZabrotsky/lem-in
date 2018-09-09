@@ -50,6 +50,7 @@ int main(void)
 	farm = new_farm();
 	error_manager(stage_one(farm), farm);
 	stage_three(stage_two(farm), farm);
+	start_handleing(farm);
 	ft_putendl(YELLOW "--     --" RESET);
 	describe_farm(farm);
 	del_farm(farm);
