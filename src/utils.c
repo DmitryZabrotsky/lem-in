@@ -10,6 +10,8 @@ t_farm *new_farm()
 		res->end = NULL;
 		res->ants = -1;
 		res->rooms = NULL;
+		res->crew = NULL;
+		res->counter = 0;
 	}
 	return (res);
 }
@@ -25,7 +27,20 @@ t_room *new_room()
 		res->y = -1;
 		res->connections = NULL;
 		res->weight = -1;
-		res->way = NULL;	
+		res->ways = NULL;
+		res->lock = 0;	
+	}
+	return (res);
+}
+
+t_ant	*new_ant(int id, t_room *start)
+{
+	t_ant *res;
+
+	if ((res = (t_ant *)malloc(sizeof(t_ant))))
+	{
+		res->id = id;
+		res->location = start;
 	}
 	return (res);
 }
@@ -54,7 +69,7 @@ void describe_room(t_room *room)
 		lst = lst->next;
 	}
 	printf("\n");
-	lst = room->way;
+	lst = room->ways;
 	while (lst)
 	{
 		buf = lst->content;
