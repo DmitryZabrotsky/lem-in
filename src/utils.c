@@ -59,24 +59,27 @@ void describe_room(t_room *room)
 	t_list *lst;
 	t_room *buf;
 
-	printf("name: %s\nx: %i y: %i\nweight: %i\n", room->name, room->x, room->y, room->weight);
+	printf("name: %s%s%s\nx: %i y: %i\nweight: %i\n", GREEN, room->name, RESET,
+	room->x, room->y, room->weight);
 
 	lst = room->connections;
+	printf("connections: ");
 	while (lst)
 	{
 		buf = lst->content;
-		printf("%s ", buf->name);
+		printf("%s%s%s ", MAGENTA, buf->name, RESET);
 		lst = lst->next;
 	}
 	printf("\n");
+	printf("ways: ");
 	lst = room->ways;
 	while (lst)
 	{
 		buf = lst->content;
-		printf("%s ", buf->name);
+		printf("%s%s%s ", RED, buf->name, RESET);
 		lst = lst->next;
 	}
-	printf("\n");
+	printf("\n\n");
 }
 
 void describe_farm(t_farm * farm)
