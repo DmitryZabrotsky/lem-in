@@ -63,7 +63,13 @@ t_room			*get_room(char *s, t_farm *farm);
 void			start_handleing(t_farm *farm);
 int				is_way_exist(t_room *room, t_room *name);
 
-
 void			spawn_ants(t_farm *farm);
 void			move_ants(t_farm *farm);
+
+void			check_near_rooms(t_room *end);
+void			sort_ways(t_room *room);
+void			sort_all_ways(t_room *room);
+void			check_rooms(t_room *room, t_room *way);
+
+
 #endif
