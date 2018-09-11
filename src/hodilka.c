@@ -1,16 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hodilka.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dzabrots <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/11 16:34:57 by dzabrots          #+#    #+#             */
+/*   Updated: 2018/09/11 16:35:01 by dzabrots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lemin.h"
-
-void		spawn_ants(t_farm *farm)
-{
-	int i;
-
-	i = 0;
-	while (i < farm->ants)
-	{
-		ft_lstaddend(&farm->crew ,to_lst(new_ant(++i, farm->start)));
-	}
-	// printf("all ants are in\n");
-}
 
 void		ant_info(t_ant *ant)
 {
@@ -22,8 +22,8 @@ void		ant_info(t_ant *ant)
 
 int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 {
-	t_list *lst;
-	t_room *room;
+	t_list	*lst;
+	t_room	*room;
 
 	lst = ant->location->connections;
 	while (lst)
@@ -49,7 +49,7 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 
 int			check_status(t_list *status, t_room *room)
 {
-	t_list *lst;
+	t_list	*lst;
 
 	lst = status;
 	while (lst)
@@ -63,8 +63,8 @@ int			check_status(t_list *status, t_room *room)
 
 void		move_ant(t_ant *ant, t_farm *farm, t_list **status)
 {
-	t_list *lst;
-	t_room *way;
+	t_list	*lst;
+	t_room	*way;
 
 	if (ant->location->weight == 2147483647)
 		return ;
@@ -88,9 +88,9 @@ void		move_ant(t_ant *ant, t_farm *farm, t_list **status)
 
 void		move_ants(t_farm *farm)
 {
-	t_list *lst;
-	t_ant *curr_ant;
-	t_list *status;
+	t_list	*lst;
+	t_ant	*curr_ant;
+	t_list	*status;
 
 	status = NULL;
 	lst = farm->crew;

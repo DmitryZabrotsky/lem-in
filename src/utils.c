@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dzabrots <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/11 16:37:35 by dzabrots          #+#    #+#             */
+/*   Updated: 2018/09/11 16:37:39 by dzabrots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lemin.h"
 
-t_farm *new_farm()
+t_farm		*new_farm(void)
 {
-	t_farm *res;
+	t_farm	*res;
 
 	if ((res = (t_farm *)malloc(sizeof(t_farm))))
 	{
@@ -16,9 +28,9 @@ t_farm *new_farm()
 	return (res);
 }
 
-t_room *new_room()
+t_room		*new_room(void)
 {
-	t_room *res;
+	t_room	*res;
 
 	if ((res = (t_room *)malloc(sizeof(t_room))))
 	{
@@ -28,14 +40,14 @@ t_room *new_room()
 		res->connections = NULL;
 		res->weight = -1;
 		res->ways = NULL;
-		res->lock = 0;	
+		res->lock = 0;
 	}
 	return (res);
 }
 
-t_ant	*new_ant(int id, t_room *start)
+t_ant		*new_ant(int id, t_room *start)
 {
-	t_ant *res;
+	t_ant	*res;
 
 	if ((res = (t_ant *)malloc(sizeof(t_ant))))
 	{
@@ -45,64 +57,11 @@ t_ant	*new_ant(int id, t_room *start)
 	return (res);
 }
 
-t_list *to_lst(void *obj)
+t_list		*to_lst(void *obj)
 {
-	t_list *lst;
+	t_list	*lst;
 
 	lst = ft_lstnew(NULL, 0);
 	lst->content = obj;
 	return (lst);
-}
-
-void describe_room(t_room *room)
-{
-	t_list *lst;
-	t_room *buf;
-
-	printf("name: %s%s%s\nx: %i y: %i\nweight: %i\n", GREEN, room->name, RESET,
-	room->x, room->y, room->weight);
-
-	lst = room->connections;
-	printf("connections: ");
-	while (lst)
-	{
-		buf = lst->content;
-		printf("%s%s%s ", MAGENTA, buf->name, RESET);
-		lst = lst->next;
-	}
-	printf("\n");
-	printf("ways: ");
-	lst = room->ways;
-	while (lst)
-	{
-		buf = lst->content;
-		printf("%s%s%s ", RED, buf->name, RESET);
-		lst = lst->next;
-	}
-	printf("\n\n");
-}
-
-void describe_farm(t_farm * farm)
-{
-	t_list *lst;
-	t_room *buf;
-
-	if (farm->start)
-		printf("start: %s\n", farm->start->name);
-	else
-		printf("no start!\n");
-	if (farm->end)
-		printf("end: %s\n", farm->end->name);
-	else
-		printf("no end!\n");
-	printf("ants: %i\n", farm->ants);
-
-	lst = farm->rooms;
-	while (lst)
-	{
-		buf = lst->content;
-		printf("-- room --\n");
-		describe_room(buf);
-		lst = lst->next;
-	}
 }

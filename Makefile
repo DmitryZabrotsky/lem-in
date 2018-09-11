@@ -8,7 +8,7 @@ OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a
 C_FILES = main.c utils.c stage_one.c stage_two.c \
 		stage_three.c room_handlers.c hodilka.c \
-		optimizer.c
+		optimizer.c utils2.c delete.c
 
 all: $(NAME)
 
@@ -26,7 +26,7 @@ clean:
 	rm -rf $(OBJ)
 	rm -rf filler.h.gch
 
-fclean:
+fclean: clean
 	make -C libft/ fclean
 	rm -rf $(NAME)
 

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stage_one.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dzabrots <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/11 16:37:01 by dzabrots          #+#    #+#             */
+/*   Updated: 2018/09/11 16:37:02 by dzabrots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lemin.h"
 
-int is_int(char *s)
+int			is_int(char *s)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (s[i])
@@ -14,7 +26,7 @@ int is_int(char *s)
 	return (1);
 }
 
-static int parse_ants(char *s, t_farm *farm)
+static int	parse_ants(char *s, t_farm *farm)
 {
 	if (!is_int(s))
 	{
@@ -22,22 +34,24 @@ static int parse_ants(char *s, t_farm *farm)
 		return (0);
 	}
 	farm->ants = ft_atoi(s);
-	ft_putendl(s);
+	if (*s)
+		ft_putendl(s);
 	free(s);
 	if (farm->ants <= 0)
 		return (0);
 	return (1);
 }
 
-int stage_one(t_farm *farm)
+int			stage_one(t_farm *farm)
 {
-	char *s;
+	char	*s;
 
 	while (get_next_line(0, &s) > 0)
 	{
 		if (s[0] != '#')
 			return (parse_ants(s, farm));
-		ft_putendl(s);
+		if (*s)
+			ft_putendl(s);
 		free(s);
 	}
 	return (0);

@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lemin.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dzabrots <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/11 17:02:44 by dzabrots          #+#    #+#             */
+/*   Updated: 2018/09/11 17:02:48 by dzabrots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEMIN_H
 # define LEMIN_H
 
 # include "./libft/incl/libft.h"
-# include <stdio.h>
 
-typedef	struct s_room {
+typedef	struct	s_room {
 	char		*name;
 	int			x;
 	int			y;
@@ -23,7 +34,7 @@ typedef struct	s_farm {
 	int			counter;
 }				t_farm;
 
-typedef struct 	s_ant {
+typedef struct	s_ant {
 	int			id;
 	t_room		*location;
 }				t_ant;
@@ -63,7 +74,6 @@ t_room			*get_room(char *s, t_farm *farm);
 void			start_handleing(t_farm *farm);
 int				is_way_exist(t_room *room, t_room *name);
 
-void			spawn_ants(t_farm *farm);
 void			move_ants(t_farm *farm);
 
 void			check_near_rooms(t_room *end);
@@ -71,5 +81,9 @@ void			sort_ways(t_room *room);
 void			sort_all_ways(t_room *room);
 void			check_rooms(t_room *room, t_room *way);
 
+int				count_chars(char *s, char c);
+void			del_farm(t_farm *farm);
+void			check_start_end_connection(t_farm *farm);
+void			ant_info(t_ant *ant);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   optimizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dzabrots <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/11 16:36:38 by dzabrots          #+#    #+#             */
+/*   Updated: 2018/09/11 16:36:40 by dzabrots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lemin.h"
 
 static void			check_room(t_room *room, t_room *way)
@@ -15,7 +27,7 @@ static void			check_room(t_room *room, t_room *way)
 	room->ways = to_lst(way);
 }
 
-void			check_near_rooms(t_room *end)
+void				check_near_rooms(t_room *end)
 {
 	t_list *lst;
 	t_room *room;
@@ -30,36 +42,7 @@ void			check_near_rooms(t_room *end)
 	}
 }
 
-void			sort_ways(t_room *room)
-{
-	t_list *lst;
-	t_list *next;
-	t_room *r1;
-	t_room *r2;
-
-	lst = room->ways;
-	if (!lst)
-		return ;
-	next = lst->next;
-	while (next)
-	{
-		r1 = lst->content;
-		r2 = next->content;
-		if (r1->weight > r2->weight)
-		{
-			lst->content = r2;
-			next->content = r1;
-			sort_ways(room);
-		}
-		else
-		{
-			lst = next;
-			next = lst->next;
-		}
-	}
-}
-
-void			sort_all_ways(t_room *room)
+void				sort_all_ways(t_room *room)
 {
 	t_list *lst;
 	t_room *buf;
@@ -75,10 +58,10 @@ void			sort_all_ways(t_room *room)
 	}
 }
 
-int				count_rooms_for_way(t_room *room, t_room *way)
+int					count_rooms_for_way(t_room *room, t_room *way)
 {
-	t_list *lst;
-	t_room *buf;
+	t_list	*lst;
+	t_room	*buf;
 	int		res;
 
 	res = 0;
@@ -93,7 +76,7 @@ int				count_rooms_for_way(t_room *room, t_room *way)
 	return (res);
 }
 
-void			check_rooms(t_room *room, t_room *way)
+void				check_rooms(t_room *room, t_room *way)
 {
 	int			ways_num;
 	t_list		*lst;

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stage_three.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dzabrots <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/11 16:37:18 by dzabrots          #+#    #+#             */
+/*   Updated: 2018/09/11 16:37:20 by dzabrots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lemin.h"
 
-t_room		*get_room(char *s, t_farm *farm)
+t_room			*get_room(char *s, t_farm *farm)
 {
-	t_list *lst;
-	t_room *buf;
+	t_list		*lst;
+	t_room		*buf;
 
 	lst = farm->rooms;
 	while (lst)
@@ -16,12 +28,14 @@ t_room		*get_room(char *s, t_farm *farm)
 	return (NULL);
 }
 
-static int			parse_connection(char *s, t_farm *farm)
+static int		parse_connection(char *s, t_farm *farm)
 {
-	char **arr;
-	t_room *room1;
-	t_room *room2;
+	char		**arr;
+	t_room		*room1;
+	t_room		*room2;
 
+	if ((count_chars(s, '-') != 1))
+		return (0);
 	arr = ft_strsplit(s, '-');
 	if (!check_num_of_parts(arr, 2))
 	{
@@ -32,16 +46,13 @@ static int			parse_connection(char *s, t_farm *farm)
 	room2 = get_room(arr[1], farm);
 	ft_arrfree(&arr);
 	if (!room1 || !room2)
-	{
-		printf("wrong room in connections\n");
 		return (0);
-	}
 	ft_lstaddend(&room1->connections, to_lst(room2));
 	ft_lstaddend(&room2->connections, to_lst(room1));
 	return (1);
 }
 
-void		stage_three(char *s, t_farm *farm)
+void			stage_three(char *s, t_farm *farm)
 {
 	if (!s)
 		return ;
