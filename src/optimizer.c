@@ -115,26 +115,3 @@ void			check_rooms(t_room *room, t_room *way)
 		lst = lst->next;
 	}
 }
-
-void			chose_one_way(t_room *room)
-{
-	int			ways_num;
-	t_list		*lst;
-	t_room		*buf;
-
-	ways_num = count_rooms_for_way(room, way);
-	printf("room: %s way: %s ways_num: %i\n", room->name, way->name, ways_num);
-	lst = room->connections;
-	while (lst)
-	{
-		buf = lst->content;
-		if (buf->weight != 0 &&
-			buf->weight < room->weight && is_way_exist(buf, way))
-		{
-			if (ways_num == 1)
-				check_room(buf, way);
-			check_rooms(buf, way);
-		}
-		lst = lst->next;
-	}
-}

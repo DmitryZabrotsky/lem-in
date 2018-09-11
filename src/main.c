@@ -15,6 +15,15 @@ void del_room(t_room *room)
 		free(lst);
 		lst = lstnext;
 	}
+
+	lst = room->ways;
+	while (lst)
+	{
+		lstnext = lst->next;
+		free(lst);
+		lst = lstnext;
+	}
+
 	free(room);
 }
 
@@ -30,6 +39,16 @@ void del_farm(t_farm *farm)
 		free(lst);
 		lst = next;
 	}
+
+	lst = farm->crew;
+	while (lst)
+	{
+		next = lst->next;
+		free(lst->content);
+		free(lst);
+		lst = next;
+	}
+
 	free(farm);
 }
 
@@ -63,8 +82,8 @@ int main(void)
 
 	del_farm(farm);
 
-	// while (42)
-	// {
+	while (42)
+	{
 
-	// }
+	}
 }

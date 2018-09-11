@@ -60,7 +60,21 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 	return (0);
 }
 
-void		move_ant(t_ant *ant, t_farm *farm)
+int			check_status(t_list *status, t_room *room)
+{
+	t_list *lst;
+
+	lst = status;
+	while (lst)
+	{
+		if (lst->content == room)
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
+
+void		move_ant(t_ant *ant, t_farm *farm, t_list **status)
 {
 	t_list *lst;
 	t_room *way;
@@ -72,7 +86,13 @@ void		move_ant(t_ant *ant, t_farm *farm)
 	while (lst)
 	{
 		way = lst->content;
-		if (check_way(ant, way, farm))
+		if (!ant->location->weight && check_status(*status, way) &&
+			check_way(ant, way, farm))
+		{
+			ft_lstadd(status, to_lst(way));
+			return ;
+		}
+		if (ant->location->weight && check_way(ant, way, farm))
 		{
 			return ;
 		}
@@ -84,13 +104,21 @@ void		move_ants(t_farm *farm)
 {
 	t_list *lst;
 	t_ant *curr_ant;
+	t_list *status;
 
+	status = NULL;
 	// printf("move_ants\n");
 	lst = farm->crew;
 	while (lst)
 	{
 		curr_ant = lst->content;
-		move_ant(curr_ant, farm);
+		move_ant(curr_ant, farm, &status);
 		lst = lst->next;
+	}
+	while (status)
+	{
+		lst = status->next;
+		free(status);
+		status = lst;
 	}
 }
