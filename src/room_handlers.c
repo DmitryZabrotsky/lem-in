@@ -1,3 +1,4 @@
+
 #include "../lemin.h"
 
 int				is_way_exist(t_room *room, t_room *name)
@@ -20,13 +21,9 @@ static void		set_ways(t_room *room, t_room *name)
 	t_list *lst;
 
 	lst = room->connections;
-	printf("room: %s  name: %s\n", room->name, name->name);
 	ft_lstaddend(&room->ways, to_lst(name));
 	if (!room->weight)
-	{
-		printf("e n d\n");
 		return ;
-	}
 	while (lst)
 	{
 		buf = lst->content;

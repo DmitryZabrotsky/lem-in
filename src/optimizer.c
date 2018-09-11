@@ -100,7 +100,6 @@ void			check_rooms(t_room *room, t_room *way)
 	t_room		*buf;
 
 	ways_num = count_rooms_for_way(room, way);
-	printf("room: %s way: %s ways_num: %i\n", room->name, way->name, ways_num);
 	lst = room->connections;
 	while (lst)
 	{
