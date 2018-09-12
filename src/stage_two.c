@@ -33,7 +33,7 @@ static int	check_room_name(char *name)
 		return (0);
 	while (name[i])
 	{
-		if (!ft_isalpha(name[i]) && !ft_isdigit(name[i]))
+		if (!ft_isascii(name[i]) || name[i] == '-')
 			return (0);
 		i++;
 	}
