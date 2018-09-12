@@ -52,6 +52,7 @@ t_ant		*new_ant(int id, t_room *start)
 	if ((res = (t_ant *)malloc(sizeof(t_ant))))
 	{
 		res->id = id;
+		res->way = NULL;
 		res->location = start;
 	}
 	return (res);

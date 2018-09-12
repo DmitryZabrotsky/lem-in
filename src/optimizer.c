@@ -58,6 +58,23 @@ void				sort_all_ways(t_room *room)
 	}
 }
 
+void				sort_all_connections(t_room *room)
+{
+	t_list *lst;
+	t_room *buf;
+
+	printf("sort connections for %s\n", room->name);
+	sort_connections(room);
+	lst = room->connections;
+	while (lst)
+	{
+		buf = lst->content;
+		if (buf->weight > room->weight)
+			sort_all_connections(buf);
+		lst = lst->next;
+	}
+}
+
 int					count_rooms_for_way(t_room *room, t_room *way)
 {
 	t_list	*lst;

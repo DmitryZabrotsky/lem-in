@@ -36,6 +36,7 @@ typedef struct	s_farm {
 
 typedef struct	s_ant {
 	int			id;
+	t_room		*way;
 	t_room		*location;
 }				t_ant;
 
@@ -61,6 +62,8 @@ int				stage_one(t_farm *farm);
 */
 char			*stage_two(t_farm *farm);
 int				check_num_of_parts(char **arr, int etalon);
+int				is_rooms_connected(t_room *room1, t_room *room2);
+
 
 /*
  ** stage_three.c
@@ -85,5 +88,8 @@ int				count_chars(char *s, char c);
 void			del_farm(t_farm *farm);
 void			check_start_end_connection(t_farm *farm);
 void			ant_info(t_ant *ant);
+void			sort_connections(t_room *room);
+void			sort_all_connections(t_room *room);
+
 
 #endif

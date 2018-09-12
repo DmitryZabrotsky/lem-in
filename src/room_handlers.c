@@ -100,6 +100,7 @@ void			start_handleing(t_farm *farm)
 	}
 	check_near_rooms(farm->end);
 	sort_all_ways(farm->start);
+	sort_all_connections(farm->start);
 	lst = farm->end->connections;
 	while (lst)
 	{

@@ -47,8 +47,11 @@ static int		parse_connection(char *s, t_farm *farm)
 	ft_arrfree(&arr);
 	if (!room1 || !room2)
 		return (0);
-	ft_lstaddend(&room1->connections, to_lst(room2));
-	ft_lstaddend(&room2->connections, to_lst(room1));
+	if (!is_rooms_connected(room1, room2))
+	{
+		ft_lstaddend(&room1->connections, to_lst(room2));
+		ft_lstaddend(&room2->connections, to_lst(room1));
+	}
 	return (1);
 }
 

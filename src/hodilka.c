@@ -31,9 +31,15 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 		room = lst->content;
 		// if (ant->id == 1)
 		// printf("location %s room %s !\n", ant->location->name, room->name);
+		if (room->lock)
+			printf("%s locked\n", room->name);
+		else
+			printf("%s unlocked\n", room->name);
+		if (is_way_exist(room, way))
+			printf("%s is on the %s way\n", room->name, way->name);
 		
 		if (!room->lock && is_way_exist(room, way) &&
-			room->weight > ant->location->weight)
+			room->weight >= ant->location->weight)
 		{
 			ant->location->lock = 0;
 			ant->location = room;
@@ -72,7 +78,7 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 	return (0);
 }
 
-int			check_status(t_list *status, t_room *room)
+int			check_status(t_ant *ant, t_list *status, t_room *room)
 {
 	t_list	*lst;
 
@@ -83,6 +89,7 @@ int			check_status(t_list *status, t_room *room)
 			return (0);
 		lst = lst->next;
 	}
+	ant->way = room;
 	return (1);
 }
 
@@ -97,19 +104,31 @@ void		move_ant(t_ant *ant, t_farm *farm, t_list **status)
 	while (lst)
 	{
 		way = lst->content;
-		if (!ant->location->weight && check_status(*status, way) &&
-			check_way(ant, way, farm))
+		if (!ant->way && check_status(ant, *status, way))
+			// && check_way(ant, way, farm))
 		{
 			//printf("L%i steps from start\n", ant->id);
+			// printf("set %s way for L%i\n", way->name, ant->id);
 			ft_lstadd(status, to_lst(way));
 			return ;
 		}
-		if (ant->location->weight && check_way(ant, way, farm))
-		{
-			//printf("L%i steps\n", ant->id);
-			return ;
-		}
+		// if (ant->location->weight && check_way(ant, way, farm))
+		// {
+		// 	//printf("L%i steps\n", ant->id);
+		// 	return ;
+		// }
 		lst = lst->next;
+	}
+	if (ant->way)
+	{
+		ft_putstr("L");
+		ft_putnbr(ant->id);
+		ft_putstr(" with loc ");
+		ft_putstr(ant->location->name);
+		ft_putstr(" way: ");
+		ft_putstr(ant->way->name);
+		ft_putstr("\n");
+		check_way(ant, ant->way, farm);
 	}
 }
 
@@ -126,6 +145,7 @@ void		move_ants(t_farm *farm)
 	{
 		curr_ant = lst->content;
 		move_ant(curr_ant, farm, &status);
+		//sleep(1);
 		lst = lst->next;
 	}
 	while (status)

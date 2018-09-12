@@ -1,0 +1,157 @@
+10
+##start
+start 0 1
+##end
+end 1 0
+0 0 0
+1 1 1
+2 2 2
+3 3 3
+4 4 4
+5 5 5
+6 6 6
+7 7 7
+8 8 8
+9 9 9
+start-0
+start-3
+start-4
+end-4
+end-2
+end-7
+0-4
+0-9
+0-1
+0-3
+1-2
+2-8
+2-4
+3-6
+4-9
+5-4
+6-3
+6-9
+6-7
+6-0
+6-5
+6-3
+7-1
+7-9
+8-1
+8-6
+9-1
+
+sort connections for start
+sort connections for 0
+sort connections for 9
+sort connections for 7
+sort connections for end
+sort connections for 1
+sort connections for 7
+sort connections for end
+sort connections for 8
+sort connections for 6
+sort connections for 7
+sort connections for end
+sort connections for 8
+sort connections for 3
+sort connections for 6
+sort connections for 7
+sort connections for end
+sort connections for 8
+sort connections for 4
+sort connections for end
+sort connections for 2
+sort connections for end
+sort connections for 8
+sort connections for 9
+sort connections for 7
+sort connections for end
+sort connections for 5
+start: start
+end: end
+ants: 10
+-- room --
+name: start
+x: 0 y: 1
+weight: 0
+connections: 0(1) 3(1) 4(1) 
+ways: 4 2 7 
+
+-- room --
+name: end
+x: 1 y: 0
+weight: 2147483647
+connections: 7(3) 2(2) 4(1) 
+ways: 4 2 2 7 7 7 
+
+-- room --
+name: 0
+x: 0 y: 0
+weight: 1
+connections: 9(2) 1(2) 6(2) 4(1) 3(1) start(0) 
+ways: 7 
+
+-- room --
+name: 1
+x: 1 y: 1
+weight: 2
+connections: 7(3) 8(3) 2(2) 9(2) 0(1) 
+ways: 2 7 
+
+-- room --
+name: 2
+x: 2 y: 2
+weight: 2
+connections: end(2147483647) 8(3) 1(2) 4(1) 
+ways: 2 
+
+-- room --
+name: 3
+x: 3 y: 3
+weight: 1
+connections: 6(2) 0(1) start(0) 
+ways: 4 2 7 
+
+-- room --
+name: 4
+x: 4 y: 4
+weight: 1
+connections: end(2147483647) 2(2) 9(2) 5(2) 0(1) start(0) 
+ways: 4 
+
+-- room --
+name: 5
+x: 5 y: 5
+weight: 2
+connections: 6(2) 4(1) 
+ways: 2 7 
+
+-- room --
+name: 6
+x: 6 y: 6
+weight: 2
+connections: 7(3) 8(3) 9(2) 5(2) 3(1) 0(1) 
+ways: 2 7 
+
+-- room --
+name: 7
+x: 7 y: 7
+weight: 3
+connections: end(2147483647) 6(2) 1(2) 9(2) 
+ways: 7 
+
+-- room --
+name: 8
+x: 8 y: 8
+weight: 3
+connections: 2(2) 1(2) 6(2) 
+ways: 
+
+-- room --
+name: 9
+x: 9 y: 9
+weight: 2
+connections: 7(3) 6(2) 1(2) 0(1) 4(1) 
+ways: 2 7 
+
