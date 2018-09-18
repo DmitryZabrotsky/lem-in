@@ -93,6 +93,7 @@ void			sort_connections(t_room *room);
 void			sort_all_connections(t_room *room);
 void			del_broken_ways(t_farm* farm);
 int				check_status(t_list *status, t_room *room);
+void			unlock_rooms(t_farm *farm);
 
 
 

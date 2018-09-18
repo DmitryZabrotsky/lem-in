@@ -124,7 +124,7 @@ void			del_broken_ways(t_farm* farm)
 	lst = farm->rooms;
 }
 
-int				is_ant_here(t_room *room, t_farm *farm)
+static int		is_ant_here(t_room *room, t_farm *farm)
 {
 	t_list *lst;
 	t_ant *ant;
@@ -133,7 +133,30 @@ int				is_ant_here(t_room *room, t_farm *farm)
 	while (lst)
 	{
 		ant = lst->content;
+		if (ant)
+		{
+			if (room == ant->location)
+				return (1);
+			lst = lst->next;
+		}
+	}
+	return (0);
+}
 
-		lst = lst->next;
+void			unlock_rooms(t_farm *farm)
+{
+	t_list	*lst;
+	t_room 	*room;
+
+	lst = farm->rooms;
+	while (lst)
+	{
+		room = lst->content;
+		if (room)
+		{
+			if (!is_ant_here(room, farm))
+				room->lock = 0;
+			lst = lst->next;
+		}
 	}
 }

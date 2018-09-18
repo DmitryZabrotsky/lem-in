@@ -104,6 +104,8 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 		}
 		lst = lst->next;
 	}
+	unlock_rooms(farm);
+	//check_way(ant, way, farm);
 	return (0);
 }
 
