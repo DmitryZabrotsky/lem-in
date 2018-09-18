@@ -38,6 +38,7 @@ typedef struct	s_ant {
 	int			id;
 	t_room		*way;
 	t_room		*location;
+	t_list		*checked;
 }				t_ant;
 
 void			error_manager(int code, t_farm *farm);
@@ -90,6 +91,9 @@ void			check_start_end_connection(t_farm *farm);
 void			ant_info(t_ant *ant);
 void			sort_connections(t_room *room);
 void			sort_all_connections(t_room *room);
+void			del_broken_ways(t_farm* farm);
+int				check_status(t_list *status, t_room *room);
+
 
 
 #endif

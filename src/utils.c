@@ -54,6 +54,7 @@ t_ant		*new_ant(int id, t_room *start)
 		res->id = id;
 		res->way = NULL;
 		res->location = start;
+		res->checked = NULL;
 	}
 	return (res);
 }

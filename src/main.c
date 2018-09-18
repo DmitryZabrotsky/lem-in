@@ -101,7 +101,8 @@ void describe_room(t_room *room)
 	while (lst)
 	{
 		buf = lst->content;
-		printf("%s ", buf->name);
+		if (buf)
+			printf("%s ", buf->name);
 		lst = lst->next;
 	}
 	printf("\n\n");
@@ -143,10 +144,10 @@ int				main(void)
 	ft_putendl("");
 	check_start_end_connection(farm);
 	describe_farm(farm);
-	// while (farm->counter < farm->ants)
-	// {
-	// 	move_ants(farm);
-	// 	ft_putendl("");
-	// }
+	while (farm->counter < farm->ants)
+	{
+		move_ants(farm);
+		ft_putendl("");
+	}
 	del_farm(farm);
 }

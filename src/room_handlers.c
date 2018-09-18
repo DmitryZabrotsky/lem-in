@@ -108,4 +108,5 @@ void			start_handleing(t_farm *farm)
 		check_rooms(buf, buf);
 		lst = lst->next;
 	}
+	del_broken_ways(farm);
 }
