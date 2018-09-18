@@ -89,7 +89,7 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 		// if (ant->id == 1)
 		// printf("location %s room %s !\n", ant->location->name, room->name);
 
-		if (!room->lock && is_way_exist(room, way))
+		if (!room->lock && room->weight && is_way_exist(room, way))
 		{
 			//ant->location->lock = 0;
 			ant->location = room;
