@@ -28,21 +28,7 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 	lst = ant->location->connections;
 	while (lst)
 	{
-		room = lst->content;
-		// if (ant->id == 1)
-		// printf("location %s room %s !\n", ant->location->name, room->name);
-		// if (!room->lock)
-		// 	printf("%s unlocked\n", room->name);
-		// if (is_way_exist(room, way))
-		// 	printf("%s is on the %s way\n", room->name, way->name);
-		// if (room->weight >= ant->location->weight)
-		// 	printf("this is right way\n");
-		// if (check_status(ant->checked, room))
-		// 	printf("ant was never been here\n");
-		// else
-		// 	printf("ant already was here\n");
-		// printf("-------\n");
-		
+		room = lst->content;		
 		if (!room->lock && is_way_exist(room, way) &&
 			room->weight >= ant->location->weight && check_status(ant->checked, room))
 		{
@@ -64,9 +50,6 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 	while (lst)
 	{
 		room = lst->content;
-		// if (ant->id == 1)
-		// printf("location %s room %s !\n", ant->location->name, room->name);
-
 		if (!room->lock && is_way_exist(room, way) &&
 			room->weight >= ant->location->weight)
 		{
@@ -86,12 +69,8 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 	while (lst)
 	{
 		room = lst->content;
-		// if (ant->id == 1)
-		// printf("location %s room %s !\n", ant->location->name, room->name);
-
 		if (!room->lock && room->weight && is_way_exist(room, way))
 		{
-			//ant->location->lock = 0;
 			ant->location = room;
 			if (ant->location->weight < 2147483647)
 				ant->location->lock = 1;
@@ -104,9 +83,7 @@ int			check_way(t_ant *ant, t_room *way, t_farm *farm)
 		}
 		lst = lst->next;
 	}
-	printf("oh!!\n");
 	unlock_rooms(farm);
-	//check_way(ant, way, farm);
 	return (0);
 }
 
@@ -136,32 +113,15 @@ void		move_ant(t_ant *ant, t_farm *farm, t_list **status)
 	{
 		way = lst->content;
 		if (way && !ant->way && check_status(*status, way))
-			// && check_way(ant, way, farm))
 		{
 			ant->way = way;
-			//printf("L%i steps from start\n", ant->id);
-			// printf("set %s way for L%i\n", way->name, ant->id);
 			ft_lstadd(status, to_lst(way));
 			return ;
 		}
-		// if (ant->location->weight && check_way(ant, way, farm))
-		// {
-		// 	//printf("L%i steps\n", ant->id);
-		// 	return ;
-		// }
 		lst = lst->next;
 	}
 	if (ant->way)
-	{
-		// ft_putstr("L");
-		// ft_putnbr(ant->id);
-		// ft_putstr(" with loc ");
-		// ft_putstr(ant->location->name);
-		// ft_putstr(" way: ");
-		// ft_putstr(ant->way->name);
-		// ft_putstr("\n");
 		check_way(ant, ant->way, farm);
-	}
 }
 
 void		move_ants(t_farm *farm)
@@ -170,14 +130,13 @@ void		move_ants(t_farm *farm)
 	t_ant	*curr_ant;
 	t_list	*status;
 
-	//printf("move_ants\n");
+
 	status = NULL;
 	lst = farm->crew;
 	while (lst)
 	{
 		curr_ant = lst->content;
 		move_ant(curr_ant, farm, &status);
-		//sleep(1);
 		lst = lst->next;
 	}
 	while (status)

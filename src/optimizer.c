@@ -63,7 +63,6 @@ void				sort_all_connections(t_room *room)
 	t_list *lst;
 	t_room *buf;
 
-	printf("sort connections for %s\n", room->name);
 	sort_connections(room);
 	lst = room->connections;
 	while (lst)

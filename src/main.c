@@ -141,9 +141,9 @@ int				main(void)
 		error_manager(0, farm);
 	start_handleing(farm);
 	spawn_ants(farm);
-	ft_putendl("");
+	// ft_putendl("");
 	check_start_end_connection(farm);
-	describe_farm(farm);
+	//describe_farm(farm);
 	while (farm->counter < farm->ants)
 	{
 		move_ants(farm);

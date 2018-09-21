@@ -5,7 +5,7 @@ int			is_way_norm(t_room *room, t_room *way)
 	t_list *lst;
 	t_room *r;
 
-	printf("is_way_norm\n");
+	// printf("is_way_norm\n");
 	lst = room->connections;
 	while (lst)
 	{
@@ -27,7 +27,7 @@ void			del_way(t_room *room, t_room *way)
 	t_list *lst;
 	t_room *r;
 
-	printf("del_way\n");
+	// printf("del_way\n");
 	lst = room->ways;
 	prev = NULL;
 	while (lst)
@@ -50,7 +50,7 @@ void			del_way(t_room *room, t_room *way)
 
 void			free_lst(t_list *lst)
 {
-	printf("free_lst\n");
+	// printf("free_lst\n");
 	if (!lst)
 	{
 		//printf("lst non exist\n");
@@ -69,7 +69,7 @@ int				clear_ways(t_room *room, t_room *way)
 	t_list 			*lst;
 	t_room			*r;
 
-	printf("clear_ways location  %s way %s\n", room->name, way->name);
+	// printf("clear_ways location  %s way %s\n", room->name, way->name);
 	lst = room->connections;
 	ft_lstadd(&checked, to_lst(room));
 	while (lst)
@@ -79,7 +79,7 @@ int				clear_ways(t_room *room, t_room *way)
 		{
 			free_lst(checked);
 			checked = NULL;
-			printf("this is end!\n");
+			// printf("this is end!\n");
 			return (1);
 		}
 		if (r->weight >= room->weight && is_way_exist(r, way)
@@ -91,7 +91,7 @@ int				clear_ways(t_room *room, t_room *way)
 	}
 	del_way(room, way);
 	free_lst(checked);
-	printf("oh no(((\n");
+	// printf("oh no(((\n");
 	checked = NULL;
 	return (0);
 }
@@ -102,7 +102,7 @@ void			del_broken_ways(t_farm* farm)
 	t_list *lst1;
 	t_room *room;
 
-	printf("del_broken_ways\n");
+	// printf("del_broken_ways\n");
 	lst = farm->start->ways;
 	while (lst)
 	{
