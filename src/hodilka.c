@@ -20,73 +20,6 @@ void		ant_info(t_ant *ant)
 	ft_putstr(ant->location->name);
 }
 
-int			check_way(t_ant *ant, t_room *way, t_farm *farm)
-{
-	t_list	*lst;
-	t_room	*room;
-
-	lst = ant->location->connections;
-	while (lst)
-	{
-		room = lst->content;		
-		if (!room->lock && is_way_exist(room, way) &&
-			room->weight >= ant->location->weight && check_status(ant->checked, room))
-		{
-			ant->location->lock = 0;
-			ant->location = room;
-			if (ant->location->weight < 2147483647)
-				ant->location->lock = 1;
-			else
-				farm->counter++;
-			ft_lstadd(&ant->checked, to_lst(ant->location));
-			ant_info(ant);
-			ft_putstr(" ");
-			return (1);
-		}
-		lst = lst->next;
-	}
-	ant->checked = NULL;
-	lst = ant->location->connections;
-	while (lst)
-	{
-		room = lst->content;
-		if (!room->lock && is_way_exist(room, way) &&
-			room->weight >= ant->location->weight)
-		{
-			ant->location = room;
-			if (ant->location->weight < 2147483647)
-				ant->location->lock = 1;
-			else
-				farm->counter++;
-			ft_lstadd(&ant->checked, to_lst(ant->location));
-			ant_info(ant);
-			ft_putstr(" ");
-			return (1);
-		}
-		lst = lst->next;
-	}
-	lst = ant->location->connections;
-	while (lst)
-	{
-		room = lst->content;
-		if (!room->lock && room->weight && is_way_exist(room, way))
-		{
-			ant->location = room;
-			if (ant->location->weight < 2147483647)
-				ant->location->lock = 1;
-			else
-				farm->counter++;
-			ft_lstadd(&ant->checked, to_lst(ant->location));
-			ant_info(ant);
-			ft_putstr(" ");
-			return (1);
-		}
-		lst = lst->next;
-	}
-	unlock_rooms(farm);
-	return (0);
-}
-
 int			check_status(t_list *status, t_room *room)
 {
 	t_list	*lst;
@@ -129,7 +62,6 @@ void		move_ants(t_farm *farm)
 	t_list	*lst;
 	t_ant	*curr_ant;
 	t_list	*status;
-
 
 	status = NULL;
 	lst = farm->crew;

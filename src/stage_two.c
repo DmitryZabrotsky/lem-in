@@ -70,6 +70,7 @@ static int	parse_rooms(t_farm *farm, char *s, int status)
 	room->y = ft_atoi(arr[2]);
 	ft_arrfree(&arr);
 	ft_lstaddend(&farm->rooms, to_lst(room));
+	farm->room_counter++;
 	if (status == 1 && !farm->start)
 		farm->start = room;
 	else if (status == 1)
@@ -94,7 +95,7 @@ char		*stage_two(t_farm *farm)
 			status = 2;
 		else if (s[0] != '#')
 		{
-			if (!parse_rooms(farm, s, status))
+			if (!parse_rooms(farm, s, status) || farm->room_counter > 1010)
 				return (s);
 			status = 0;
 		}

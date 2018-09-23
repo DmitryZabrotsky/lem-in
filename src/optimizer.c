@@ -42,22 +42,6 @@ void				check_near_rooms(t_room *end)
 	}
 }
 
-void				sort_all_ways(t_room *room)
-{
-	t_list *lst;
-	t_room *buf;
-
-	sort_ways(room);
-	lst = room->connections;
-	while (lst)
-	{
-		buf = lst->content;
-		if (buf->weight > room->weight)
-			sort_all_ways(buf);
-		lst = lst->next;
-	}
-}
-
 void				sort_all_connections(t_room *room)
 {
 	t_list *lst;

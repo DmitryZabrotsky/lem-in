@@ -6,7 +6,7 @@
 /*   By: dzabrots <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 17:02:44 by dzabrots          #+#    #+#             */
-/*   Updated: 2018/09/11 17:02:48 by dzabrots         ###   ########.fr       */
+/*   Updated: 2018/09/23 16:06:48 by dzabrots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_farm {
 	t_list		*crew;
 	t_list		*rooms;
 	int			counter;
+	int			room_counter;
 }				t_farm;
 
 typedef struct	s_ant {
@@ -65,7 +66,6 @@ char			*stage_two(t_farm *farm);
 int				check_num_of_parts(char **arr, int etalon);
 int				is_rooms_connected(t_room *room1, t_room *room2);
 
-
 /*
  ** stage_three.c
 */
@@ -91,10 +91,21 @@ void			check_start_end_connection(t_farm *farm);
 void			ant_info(t_ant *ant);
 void			sort_connections(t_room *room);
 void			sort_all_connections(t_room *room);
-void			del_broken_ways(t_farm* farm);
+void			del_broken_ways(t_farm *farm);
 int				check_status(t_list *status, t_room *room);
 void			unlock_rooms(t_farm *farm);
 
+void			free_lst(t_list *lst);
 
+/*
+ ** del_utils.c
+*/
+int				is_ant_here(t_room *room, t_farm *farm);
+void			del_way(t_room *room, t_room *way);
+
+/*
+ ** check_way.c
+*/
+int				check_way(t_ant *ant, t_room *way, t_farm *farm);
 
 #endif

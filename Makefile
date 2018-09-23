@@ -8,7 +8,8 @@ OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a
 C_FILES = main.c utils.c stage_one.c stage_two.c \
 		stage_three.c room_handlers.c hodilka.c \
-		optimizer.c utils2.c del.c
+		optimizer.c utils2.c del.c del_utils.c \
+		check_way.c
 
 all: $(NAME)
 

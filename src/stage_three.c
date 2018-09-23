@@ -57,7 +57,7 @@ static int		parse_connection(char *s, t_farm *farm)
 
 void			stage_three(char *s, t_farm *farm)
 {
-	if (!s)
+	if (!s || farm->room_counter > 1010)
 		return ;
 	while (42)
 	{

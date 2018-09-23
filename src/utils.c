@@ -24,6 +24,7 @@ t_farm		*new_farm(void)
 		res->rooms = NULL;
 		res->crew = NULL;
 		res->counter = 0;
+		res->room_counter = 0;
 	}
 	return (res);
 }
@@ -66,4 +67,20 @@ t_list		*to_lst(void *obj)
 	lst = ft_lstnew(NULL, 0);
 	lst->content = obj;
 	return (lst);
+}
+
+void		sort_all_ways(t_room *room)
+{
+	t_list	*lst;
+	t_room	*buf;
+
+	sort_ways(room);
+	lst = room->connections;
+	while (lst)
+	{
+		buf = lst->content;
+		if (buf->weight > room->weight)
+			sort_all_ways(buf);
+		lst = lst->next;
+	}
 }

@@ -37,7 +37,7 @@ static int	parse_ants(char *s, t_farm *farm)
 	if (*s)
 		ft_putendl(s);
 	free(s);
-	if (farm->ants <= 0)
+	if (farm->ants <= 0 || farm->ants > 10000)
 		return (0);
 	return (1);
 }
